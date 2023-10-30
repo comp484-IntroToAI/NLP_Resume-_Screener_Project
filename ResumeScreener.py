@@ -1,4 +1,4 @@
-!pip install docx2txt
+pip install docx2txt
 import docx2txt
 
 job_description = docx2txt.process('/content/Sample Job Description.docx')
