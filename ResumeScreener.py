@@ -1,8 +1,7 @@
-pip install docx2txt
 import docx2txt
 
-job_description = docx2txt.process('/content/Sample Job Description.docx')
-resume = docx2txt.process('/content/Keller_Tech_Resume9.18.23.docx')
+job_description = docx2txt.process('content/Sample Job Description.docx')
+resume = docx2txt.process('content/Keller_Tech_Resume9.18.23.docx')
 
 print(resume)
 
