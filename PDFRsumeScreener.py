@@ -1,11 +1,11 @@
 import pdftotext
 
-with open ("10554236.pdf", "rb") as f:
+with open ("NLP Resume Files/data/INFORMATION-TECHNOLOGY/10089434.pdf", "rb") as f:
     pdf = pdftotext.PDF(f)
 
 print(pdf)
 
-with open ("NLP A.I. Resume Files/Jobs/Sample Job Description.pdf", "rb") as j:
+with open ("NLP Resume Files/Jobs/Sample Job Description.pdf", "rb") as j:
     job = pdftotext.PDF(j)
 
 print(job)
