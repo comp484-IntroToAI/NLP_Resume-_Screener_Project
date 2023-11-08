@@ -3,12 +3,12 @@ import pdftotext
 with open ("NLP Resume Files/data/INFORMATION-TECHNOLOGY/10089434.pdf", "rb") as f:
     pdf = pdftotext.PDF(f)
 
-print(pdf)
+print(pdf[0])
 
 with open ("NLP Resume Files/Jobs/Sample Job Description.pdf", "rb") as j:
     job = pdftotext.PDF(j)
 
-print(job)
+print(job[0])
 # resume = docx2txt.process('content/Keller_Tech_Resume9.18.23.docx')
 
 # print(resume)
