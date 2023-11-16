@@ -61,6 +61,9 @@ def getBestResume(resumeDirectory, jobText):
 # print(getBestResume(directoryInfoTech, getPDFJobDescription(sampleJob)))
 print(getBestResume(directoryPR, getPDFJobDescription(sampleJob)))
 
+print(getBestResume(directoryInfoTech, getPDFJobDescription(sampleJob)))
+
+
 
 # for pdfFile in os.listdir(directoryInfoTech):
 #     infoTechFiles = os.path.join(directoryInfoTech, pdfFile)
