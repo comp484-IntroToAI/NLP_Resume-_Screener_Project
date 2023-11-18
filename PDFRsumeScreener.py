@@ -31,6 +31,29 @@ directorySales = 'NLP Resume Files/data/SALES/'
 directoryTeacher = 'NLP Resume Files/data/TEACHER/'
 
 sampleJob = "NLP Resume Files/Jobs/Sample Job Description.pdf"
+sampleJob2 = "NLP Resume Files/Jobs/Job-Description2.txt"
+sampleResume = "NLP Resume Files/Fullstack-Developer-Resume.txt"
+
+list = ["the", "a", "about", "above", "actually", "after", "again", "against", "all", "almost", "also", "although", "always", "am", "an", "and", "any", "are", "as", "at",
+        "be", "became", "become", "because", "bin", "before", "being", "below", "between", "both", "but", "by", 
+        "can", "could", 
+        "did", "do", "does", "doing", "down", "during", 
+        "each", "either", "else", 
+        "few", "for", "from", "further"
+        , "had", "has", "have", "having", "he", "he'd", "he'll", "hence", "he's", "her", "here", "hears", "hers", "herself", "him", "himself", "his", "how", "how's",
+        "I", "I'd", "I'll", "I'm", "I've", "if", "if", "in", "into", "is", "it", "it's", "its", "itself"
+        "just",
+        "let's",
+        "may", "maybe", "me", "might", "mine", "more", "most", "must", "my", "myself",
+        "neither", "nor", "not", 
+        "of", "oh", "on", "once", "only", "okay", "or,", "other", "ought", "our", "ours", "ourselves", "out", "over", "own",
+        "same", "she", "she'd", "she'll", "she's", "so", "some", "such", 
+        "than", "that", "that's", "the", "their", "theirs", "them", "themselves", "then", "there", "there's", "these", "they", "they'd", "they'll", "they're", "they've'", "this", "those", "through", "to", "too",
+        "under", "until", "up",
+        "very",
+        "was", "we'd", "we", "we'll", "we're", "we've", "were", "what", "what's", "when", "whenever", "when's", "where", "whereas", "wherever", "where's", "whether", "which", "while", "who", "whoever", "who's", "whose", "why", "whom", "why's", "will", "with", "within", "would",
+        "yes", "yet", "you", "you'd", "you'll", "you're", "you've", "your", "yours", "yourself", "yourself", "yourselves"]
+
 def getPDFJobDescription(jobPath):
     with open (jobPath, "rb") as j:
         jobText = pdftotext.PDF(j)
@@ -46,10 +69,10 @@ def getBestResume(resumeDirectory, jobText):
                 pdf = pdftotext.PDF(f)
                 resumeText = "\n\n".join(pdf)
                 content = [jobText, resumeText]
-                cv = CountVectorizer()
+                cv = CountVectorizer(stop_words=list)
                 matrix = cv.fit_transform(content)
                 similarity_matrix = cosine_similarity(matrix)
-                print('------ resume  ------')
+                print('------ new resume  ------')
                 result = str(similarity_matrix[1][0]*100)
                 print('Current Resume:' + pdfFile)
                 print('Resume matches by:'+ result + '%\n')
@@ -59,9 +82,9 @@ def getBestResume(resumeDirectory, jobText):
     return bestResume, bestResumeScore
 
 # print(getBestResume(directoryInfoTech, getPDFJobDescription(sampleJob)))
-print(getBestResume(directoryPR, getPDFJobDescription(sampleJob)))
+print(getBestResume(directoryChef, getPDFJobDescription(sampleJob)))
 
-print(getBestResume(directoryInfoTech, getPDFJobDescription(sampleJob)))
+print(getBestResume(directoryInfoTech, sampleJob2))
 
 
 
