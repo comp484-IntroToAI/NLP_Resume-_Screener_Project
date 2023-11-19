@@ -1,5 +1,10 @@
 # Python program to generate word vectors using Word2Vec
 
+import pdftotext
+import os
+import itertools
+import math
+
 # importing all necessary modules
 from nltk.tokenize import sent_tokenize, word_tokenize
 import warnings
@@ -10,17 +15,28 @@ warnings.filterwarnings(action = 'ignore')
 import gensim
 from gensim.models import Word2Vec
 
-# Reads ‘alice.txt’ file
-sample = open("C:\\Users\\Admin\\Desktop\\alice.txt", "utf8")
-s = sample.read()
+# List of stop words
+stopWordsList = ["the", "a", "about", "above", "actually", "after", "again", "against", "all", "almost", "also", "although", "always", "am", "an", "and", "any", "are", "as", "at",
+        "be", "became", "become", "because", "bin", "before", "being", "below", "between", "both", "but", "by", 
+        "can", "could", 
+        "did", "do", "does", "doing", "down", "during", 
+        "each", "either", "else", 
+        "few", "for", "from", "further"
+        , "had", "has", "have", "having", "he", "he'd", "he'll", "hence", "he's", "her", "here", "hears", "hers", "herself", "him", "himself", "his", "how", "how's",
+        "I", "I'd", "I'll", "I'm", "I've", "if", "if", "in", "into", "is", "it", "it's", "its", "itself"
+        "just",
+        "let's",
+        "may", "maybe", "me", "might", "mine", "more", "most", "must", "my", "myself",
+        "neither", "nor", "not", 
+        "of", "oh", "on", "once", "only", "okay", "or,", "other", "ought", "our", "ours", "ourselves", "out", "over", "own",
+        "same", "she", "she'd", "she'll", "she's", "so", "some", "such", 
+        "than", "that", "that's", "the", "their", "theirs", "them", "themselves", "then", "there", "there's", "these", "they", "they'd", "they'll", "they're", "they've'", "this", "those", "through", "to", "too",
+        "under", "until", "up",
+        "very",
+        "was", "we'd", "we", "we'll", "we're", "we've", "were", "what", "what's", "when", "whenever", "when's", "where", "whereas", "wherever", "where's", "whether", "which", "while", "who", "whoever", "who's", "whose", "why", "whom", "why's", "will", "with", "within", "would",
+        "yes", "yet", "you", "you'd", "you'll", "you're", "you've", "your", "yours", "yourself", "yourself", "yourselves"]
 
-def openResumes(resumeDirectory)
-    for pdfFile in os.listdir(resumeDirectory):
-        completeResume = os.path.join(resumeDirectory, pdfFile)
-        if os.path.isfile(completeResume):
-            with open (completeResume, "rb") as f:
-                pdf = pdftotext.PDF(f)
-                resumeText = "\n\n".join(pdf)
+
 
 
 directoryAccountant = 'NLP Resume Files/data/ACCOUNTANT/'
@@ -49,44 +65,56 @@ directorySales = 'NLP Resume Files/data/SALES/'
 directoryTeacher = 'NLP Resume Files/data/TEACHER/'
 
 sampleJob = "NLP Resume Files/Jobs/Sample Job Description.pdf"
+job2Text = open("NLP Resume Files/Jobs/Job-Description2.txt")
+sampleJob2 = job2Text.read()
+cleanJob2 = sampleJob2.replace("\n", " ")
 
-# Replaces escape character with space
-f = s.replace("\n", " ")
+resumeData = []
 
-data = []
+jobDescriptionData = []
+
+def getPDFJobDescription(jobPath):
+    with open (jobPath, "rb") as j:
+        jobText = pdftotext.PDF(j)
+        completejobDesciption = "\n\n".join(jobText)
+    return completejobDesciption
+
+def openResumes(resumeDirectory):
+    for pdfFile in os.listdir(resumeDirectory):
+        completeResume = os.path.join(resumeDirectory, pdfFile)
+        if os.path.isfile(completeResume):
+            with open (completeResume, "rb") as f:
+                pdf = pdftotext.PDF(f)
+                resumeText = "\n\n".join(pdf)
+                cleanResumeText = resumeText.replace("\n", " ")
+                return cleanResumeText
 
 # iterate through each sentence in the file
-for i in sent_tokenize(f):
-	temp = []
-	
-	# tokenize the sentence into words
-	for j in word_tokenize(i):
-		temp.append(j.lower())
+def createTokenFromText(textInput):
+      for i in sent_tokenize(textInput):
+            temp = []
+            for j in word_tokenize(i):
+                temp.append(j.lower())
+            return resumeData.append(temp)
 
-	data.append(temp)
-
-# Create CBOW model
-model1 = gensim.models.Word2Vec(data, min_count = 1, 
-							vector_size = 100, window = 5)
+# Create CBOW model (Continuous bag of words)
+resumeCBOWModel = Word2Vec(createTokenFromText(openResumes(directoryInfoTech)), min_count = 1, vector_size = 100, window = 5)
+jobCBOWModel = Word2Vec(createTokenFromText(getPDFJobDescription(sampleJob)), min_count = 1, vector_size = 100, window = 5)
 
 # Print results
-print("Cosine similarity between 'alice' " +
-			"and 'wonderland' - CBOW : ",
-	model1.wv.similarity('alice', 'wonderland'))
-	
-print("Cosine similarity between 'alice' " +
-				"and 'machines' - CBOW : ",
-	model1.wv.similarity('alice', 'machines'))
+print(resumeCBOWModel.wv.similarity(openResumes(directoryInfoTech), getPDFJobDescription(sampleJob)))
 
-# Create Skip Gram model
-model2 = gensim.models.Word2Vec(data, min_count = 1, vector_size = 100,
-											window = 5, sg = 1)
 
-# Print results
-print("Cosine similarity between 'alice' " +
-		"and 'wonderland' - Skip Gram : ",
-	model2.wv.similarity('alice', 'wonderland'))
+
+# # Skip Gram model example
+# model2 = gensim.models.Word2Vec(data, min_count = 1, vector_size = 100,
+# 											window = 5, sg = 1)
+
+# # Print results
+# print("Cosine similarity between 'alice' " +
+# 		"and 'wonderland' - Skip Gram : ",
+# 	model2.wv.similarity('alice', 'wonderland'))
 	
-print("Cosine similarity between 'alice' " +
-			"and 'machines' - Skip Gram : ",
-	model2.wv.similarity('alice', 'machines'))
+# print("Cosine similarity between 'alice' " +
+# 			"and 'machines' - Skip Gram : ",
+# 	model2.wv.similarity('alice', 'machines'))
