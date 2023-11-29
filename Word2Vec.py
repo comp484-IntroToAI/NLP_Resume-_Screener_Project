@@ -123,10 +123,10 @@ for resume in infoTechData:
     resumeCBOWModel = Word2Vec(createTokenFromText(resume), min_count = 1, vector_size = 100, window = 5)
     vector = 0
     for word in resume:
-        print(resumeCBOWModel[word])
-        vector = vector + resumeCBOWModel[word]
-    finalVector = vector / resume.__sizeof__()
-    resumeVectorContainer.update({finalVector : resume})
+        print(type(resumeCBOWModel))
+    #     vector = vector + resumeCBOWModel[word]
+    # finalVector = vector / resume.__sizeof__()
+    # resumeVectorContainer.update({finalVector : resume})
 
 
 
