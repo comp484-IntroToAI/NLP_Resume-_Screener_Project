@@ -103,13 +103,18 @@ def createTokenFromText(textInput):
 # Create CBOW model (Continuous bag of words)
 
 #resumeCBOWModel = Word2Vec(createTokenFromText(openResumes(directoryInfoTech)), min_count = 1, vector_size = 100, window = 5)
-
-resumeCBOWModel = Word2Vec(createTokenFromText(readSampleResume), min_count = 1, vector_size = 100, window = 5)
-jobCBOWModel = Word2Vec(createTokenFromText(getPDFJobDescription(sampleJob)), min_count = 1, vector_size = 100, window = 5)
+data = createTokenFromText(readSampleResume)
+model = gensim.models.Word2Vec(data, min_count = 1, vector_size = 100,
+                                             window = 5, sg = 1)
+print("Cosine similarity between 'developer' " +
+          "and 'colaborated' - CBOW : ",
+    model.wv.similarity('developer', 'colaborated'))
+# resumeCBOWModel = Word2Vec(createTokenFromText(readSampleResume), min_count = 1, vector_size = 100, window = 5)
+# jobCBOWModel = Word2Vec(createTokenFromText(getPDFJobDescription(sampleJob)), min_count = 1, vector_size = 100, window = 5)
 
 # Print results
-print(resumeCBOWModel.wv.similarity(openResumes(directoryInfoTech), getPDFJobDescription(sampleJob)))
-
+# print(resumeCBOWModel.wv.similarity(openResumes(readSampleResume), getPDFJobDescription(sampleJob)))
+print("I'm Happy!")
 
 
 # # Skip Gram model example
