@@ -37,8 +37,6 @@ stopWordsList = ["the", "a", "about", "above", "actually", "after", "again", "ag
         "yes", "yet", "you", "you'd", "you'll", "you're", "you've", "your", "yours", "yourself", "yourself", "yourselves"]
 
 
-
-
 directoryAccountant = 'NLP Resume Files/data/ACCOUNTANT/'
 directoryAdvocate = 'NLP Resume Files/data/ADVOCATE/'
 directoryAgriculture = 'NLP Resume Files/data/AGRICULTURE/'
@@ -83,6 +81,7 @@ def getPDFJobDescription(jobPath):
     return completejobDesciption
 
 def openResumes(resumeDirectory):
+    resumeList = []
     for pdfFile in os.listdir(resumeDirectory):
         completeResume = os.path.join(resumeDirectory, pdfFile)
         if os.path.isfile(completeResume):
@@ -90,7 +89,8 @@ def openResumes(resumeDirectory):
                 pdf = pdftotext.PDF(f)
                 resumeText = "\n\n".join(pdf)
                 cleanResumeText = resumeText.replace("\n", " ")
-                return cleanResumeText
+                resumeList.append(cleanResumeText)
+                return resumeList
 
 # iterate through each sentence in the file
 def createTokenFromText(textInput):
@@ -103,18 +103,37 @@ def createTokenFromText(textInput):
 # Create CBOW model (Continuous bag of words)
 
 #resumeCBOWModel = Word2Vec(createTokenFromText(openResumes(directoryInfoTech)), min_count = 1, vector_size = 100, window = 5)
-data = createTokenFromText(readSampleResume)
-model = gensim.models.Word2Vec(data, min_count = 1, vector_size = 100,
-                                             window = 5, sg = 1)
-print("Cosine similarity between 'developer' " +
-          "and 'colaborated' - CBOW : ",
-    model.wv.similarity('developer', 'colaborated'))
+
+# data = createTokenFromText(readSampleResume)
+# model = gensim.models.Word2Vec(data, min_count = 1, vector_size = 100,
+#                                              window = 5, sg = 1)
+# print("Cosine similarity between 'developer' " +
+#           "and 'colaborated' - CBOW : ",
+#     model.wv.similarity('developer', 'colaborated'))
+
 # resumeCBOWModel = Word2Vec(createTokenFromText(readSampleResume), min_count = 1, vector_size = 100, window = 5)
+
 # jobCBOWModel = Word2Vec(createTokenFromText(getPDFJobDescription(sampleJob)), min_count = 1, vector_size = 100, window = 5)
 
+resumeVectorContainer = dict()
+
+infoTechData = openResumes(directoryInfoTech)
+
+for resume in infoTechData:
+    resumeCBOWModel = Word2Vec(createTokenFromText(resume), min_count = 1, vector_size = 100, window = 5)
+    vector = 0
+    for word in resume:
+        print(resumeCBOWModel[word])
+        vector = vector + resumeCBOWModel[word]
+    finalVector = vector / resume.__sizeof__()
+    resumeVectorContainer.update({finalVector : resume})
+
+
+
 # Print results
-# print(resumeCBOWModel.wv.similarity(openResumes(readSampleResume), getPDFJobDescription(sampleJob)))
-print("I'm Happy!")
+print(resumeCBOWModel.wv.similarity(openResumes(readSampleResume), getPDFJobDescription(sampleJob)))
+
+print(resumeVectorContainer)
 
 
 # # Skip Gram model example
