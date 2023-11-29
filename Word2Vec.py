@@ -66,7 +66,7 @@ directoryTeacher = 'NLP Resume Files/data/TEACHER/'
 
 sampleJob = "NLP Resume Files/Jobs/Sample Job Description.pdf"
 job2Text = open("NLP Resume Files/Jobs/Job-Description2.txt")
-sampleResume = open("NLP Resume Files/Resume/Fullstack-Developer-Resume.txt")
+sampleResume = open("NLP Resume Files/Fullstack-Developer-Resume.txt")
 readSampleResume = sampleResume.read()
 
 sampleJob2 = job2Text.read()
@@ -108,7 +108,7 @@ resumeCBOWModel = Word2Vec(createTokenFromText(readSampleResume), min_count = 1,
 jobCBOWModel = Word2Vec(createTokenFromText(getPDFJobDescription(sampleJob)), min_count = 1, vector_size = 100, window = 5)
 
 # Print results
-#print(resumeCBOWModel.wv.similarity(openResumes(directoryInfoTech), getPDFJobDescription(sampleJob)))
+print(resumeCBOWModel.wv.similarity(openResumes(directoryInfoTech), getPDFJobDescription(sampleJob)))
 
 
 
