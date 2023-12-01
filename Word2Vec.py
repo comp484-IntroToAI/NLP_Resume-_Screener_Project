@@ -4,6 +4,7 @@ import pdftotext
 import os
 import itertools
 import math
+import re
 
 # importing all necessary modules
 from nltk.tokenize import sent_tokenize, word_tokenize
@@ -108,6 +109,14 @@ def createTokenFromText(textInput):
                 resumeData.append(temp)
             return resumeData
 
+
+def cleanText(txtFile):
+    # Removes any special characters from inside the word and strips it to its basic
+    txtFile.lower()
+    txtFile.strip()
+    re.sub(r'\W+', '', txtFile)
+    return 
+
 #=---------MAIN-----------
 
 glove_vectors = gensim.downloader.load("glove-wiki-gigaword-300")
@@ -116,11 +125,13 @@ resumeVectorContainer = dict()
 resumeList = openResumes(directoryInfoTech)
 
 for i in range(0, len(resumeList), 1):
+    cleanText(resumeList[i])
     for word in resumeList[i].split(): #resumes are string //[] it should be bracketed?
         #cleaning data
-        vector = glove_vectors[word.lower()]
+        
+        vector = glove_vectors[word]
         print(word)
-        #numpy arrays have type, floats or doubles, think about overflow, int gonna overflow really easy, make sure they are doubles
+        # numpy arrays have type, floats or doubles, think about overflow, int gonna overflow really easy, make sure they are doubles
         # original_array = original_array + glove_vectors.__getitem__(word)
         # finalVector = vector / resume.__sizeof__()
         # resumeVectorContainer.update({finalVector : resume})
