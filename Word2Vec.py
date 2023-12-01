@@ -7,8 +7,10 @@ import math
 
 # importing all necessary modules
 from nltk.tokenize import sent_tokenize, word_tokenize
+import gensim.downloader
 import warnings
 import os
+import numpy as np
 
 warnings.filterwarnings(action = 'ignore')
 
@@ -65,20 +67,17 @@ directoryTeacher = 'NLP Resume Files/data/TEACHER/'
 sampleJob = "NLP Resume Files/Jobs/Sample Job Description.pdf"
 job2Text = open("NLP Resume Files/Jobs/Job-Description2.txt")
 sampleResume = open("NLP Resume Files/Fullstack-Developer-Resume.txt")
-readSampleResume = sampleResume.read()
+sampleResume = sampleResume.read()
 
 sampleJob2 = job2Text.read()
 cleanJob2 = sampleJob2.replace("\n", " ")
 
-resumeData = []
 
 jobDescriptionData = []
 
-def getPDFJobDescription(jobPath):
-    with open (jobPath, "rb") as j:
-        jobText = pdftotext.PDF(j)
-        completejobDesciption = "\n\n".join(jobText)
-    return completejobDesciption
+# Create CBOW model (Continuous bag of words)
+
+#resumeCBOWModel = Word2Vec(createTokenFromText(openResumes(directoryInfoTech)), min_count = 1, vector_size = 100, window = 5)
 
 def openResumes(resumeDirectory):
     resumeList = []
@@ -92,59 +91,38 @@ def openResumes(resumeDirectory):
                 resumeList.append(cleanResumeText)
                 return resumeList
 
+def getPDFJobDescription(jobPath):
+    with open (jobPath, "rb") as j:
+        jobText = pdftotext.PDF(j)
+        completejobDesciption = "\n\n".join(jobText)
+    return completejobDesciption
+
 # iterate through each sentence in the file
 def createTokenFromText(textInput):
+      resumeData = []
       for i in sent_tokenize(textInput):
             temp = []
             for j in word_tokenize(i):
                 temp.append(j.lower())
-            return resumeData.append(temp)
+                resumeData.append(temp)
+            return resumeData
 
-# Create CBOW model (Continuous bag of words)
+#=---------MAIN-----------
 
-#resumeCBOWModel = Word2Vec(createTokenFromText(openResumes(directoryInfoTech)), min_count = 1, vector_size = 100, window = 5)
-
-# data = createTokenFromText(readSampleResume)
-# model = gensim.models.Word2Vec(data, min_count = 1, vector_size = 100,
-#                                              window = 5, sg = 1)
-# print("Cosine similarity between 'developer' " +
-#           "and 'colaborated' - CBOW : ",
-#     model.wv.similarity('developer', 'colaborated'))
-
-# resumeCBOWModel = Word2Vec(createTokenFromText(readSampleResume), min_count = 1, vector_size = 100, window = 5)
-
-# jobCBOWModel = Word2Vec(createTokenFromText(getPDFJobDescription(sampleJob)), min_count = 1, vector_size = 100, window = 5)
-
+glove_vectors = gensim.downloader.load("glove-wiki-gigaword-50")
 resumeVectorContainer = dict()
+resumeList = openResumes(directoryInfoTech)
 
-infoTechData = openResumes(directoryInfoTech)
-
-for resume in infoTechData:
-    resumeCBOWModel = Word2Vec(createTokenFromText(resume), min_count = 1, vector_size = 100, window = 5)
-    vector = 0
-    for word in resume:
-        print(type(resumeCBOWModel))
-    #     vector = vector + resumeCBOWModel[word]
-    # finalVector = vector / resume.__sizeof__()
-    # resumeVectorContainer.update({finalVector : resume})
-
-
-
-# Print results
-print(resumeCBOWModel.wv.similarity(openResumes(readSampleResume), getPDFJobDescription(sampleJob)))
-
-print(resumeVectorContainer)
-
-
-# # Skip Gram model example
-# model2 = gensim.models.Word2Vec(data, min_count = 1, vector_size = 100,
-# 											window = 5, sg = 1)
+for i in range(0, len(resumeList), 1):
+    original_array = np.empty_like(glove_vectors["test"])
+    for word in resumeList[i]: #resumes are string //[] it should be bracketed?
+        original_array = original_array + glove_vectors.__getitem__(word)
+        # finalVector = vector / resume.__sizeof__()
+        # resumeVectorContainer.update({finalVector : resume})
 
 # # Print results
-# print("Cosine similarity between 'alice' " +
-# 		"and 'wonderland' - Skip Gram : ",
-# 	model2.wv.similarity('alice', 'wonderland'))
-	
-# print("Cosine similarity between 'alice' " +
-# 			"and 'machines' - Skip Gram : ",
-# 	model2.wv.similarity('alice', 'machines'))
+# print(resumeCBOWModel.wv.similarity(openResumes(readSampleResume), getPDFJobDescription(sampleJob)))
+
+# print(resumeVectorContainer)
+print("now I can finally rest")
+
