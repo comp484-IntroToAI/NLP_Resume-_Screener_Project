@@ -16,6 +16,7 @@ warnings.filterwarnings(action = 'ignore')
 
 import gensim
 from gensim.models import Word2Vec
+from gensim.test.utils import datapath
 
 # List of stop words
 stopWordsList = ["the", "a", "about", "above", "actually", "after", "again", "against", "all", "almost", "also", "although", "always", "am", "an", "and", "any", "are", "as", "at",
@@ -109,17 +110,23 @@ def createTokenFromText(textInput):
 
 #=---------MAIN-----------
 
-glove_vectors = gensim.downloader.load("glove-wiki-gigaword-50")
+glove_vectors = gensim.downloader.load("glove-wiki-gigaword-300")
+glove_vectors.most_similar('twitter')
 resumeVectorContainer = dict()
 resumeList = openResumes(directoryInfoTech)
 
 for i in range(0, len(resumeList), 1):
-    original_array = np.empty_like(glove_vectors["test"])
-    for word in resumeList[i]: #resumes are string //[] it should be bracketed?
-        original_array = original_array + glove_vectors.__getitem__(word)
+    for word in resumeList[i].split(): #resumes are string //[] it should be bracketed?
+        #cleaning data
+        vector = glove_vectors[word.lower()]
+        print(word)
+        #numpy arrays have type, floats or doubles, think about overflow, int gonna overflow really easy, make sure they are doubles
+        # original_array = original_array + glove_vectors.__getitem__(word)
         # finalVector = vector / resume.__sizeof__()
         # resumeVectorContainer.update({finalVector : resume})
-
+     #try: 
+        #vector = ----
+    #except keyError:
 # # Print results
 # print(resumeCBOWModel.wv.similarity(openResumes(readSampleResume), getPDFJobDescription(sampleJob)))
 
