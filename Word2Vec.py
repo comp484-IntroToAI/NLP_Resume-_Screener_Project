@@ -114,8 +114,31 @@ def cleanText(txtFile):
     # Removes any special characters from inside the word and strips it to its basic
     txtFile.lower()
     txtFile.strip()
-    re.sub(r'\W+', '', txtFile)
-    return 
+    newStr = ""
+    for word in txtFile.split():
+      to_array = [char for char in word]
+      count = 0
+      for char in to_array:
+        print(char)
+        print(ord(char))
+        if (ord(char) < 65) or (96 > ord(char) > 90) or (122 < ord(char)):
+          print("OMG")
+          to_array[count] = " "
+        count = count + 1
+      newStr += convert(to_array)
+    return newStr
+
+def convert(s): 
+ 
+    # initialization of string to "" 
+    new = "" 
+ 
+    # traverse in the string 
+    for x in s: 
+        new += x 
+    new += " "
+    # return string 
+    return new 
 
 #=---------MAIN-----------
 
@@ -124,13 +147,19 @@ glove_vectors.most_similar('twitter')
 resumeVectorContainer = dict()
 resumeList = openResumes(directoryInfoTech)
 
+string = "as;dflkj!@#$%^-_"
+# print(cleanText(string))
+
+
 for i in range(0, len(resumeList), 1):
-    cleanText(resumeList[i])
-    for word in resumeList[i].split(): #resumes are string //[] it should be bracketed?
-        #cleaning data
-        
-        vector = glove_vectors[word]
-        print(word)
+    newText = cleanText(resumeList[i])
+    print("new text:  " + newText)
+    for word in newText.split(): #resumes are string //[] it should be bracketed?
+        try:
+            vector = glove_vectors[word]
+        except keyError:
+            print("error")
+        # print(word)
         # numpy arrays have type, floats or doubles, think about overflow, int gonna overflow really easy, make sure they are doubles
         # original_array = original_array + glove_vectors.__getitem__(word)
         # finalVector = vector / resume.__sizeof__()
