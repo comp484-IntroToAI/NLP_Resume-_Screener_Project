@@ -152,13 +152,17 @@ string = "as;dflkj!@#$%^-_"
 
 
 for i in range(0, len(resumeList), 1):
+    finalVector = np.empty([2, 300])
     newText = cleanText(resumeList[i])
     print("new text:  " + newText)
     for word in newText.split(): #resumes are string //[] it should be bracketed?
         try:
             vector = glove_vectors[word]
+            finalVector += vector 
         except keyError:
             print("error")
+    centroid = finalVector / len(newText.split())
+
         # print(word)
         # numpy arrays have type, floats or doubles, think about overflow, int gonna overflow really easy, make sure they are doubles
         # original_array = original_array + glove_vectors.__getitem__(word)
