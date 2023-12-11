@@ -1,0 +1,55 @@
+TAMUR ASAR
+tamurasar@gmail.com | (650) 678-3460 | github.com/Tamur11 | linkedin.com/in/tamur-a-74960013a
+
+EDUCATION
+Macalester College, MN
+Expected Graduation: December 2023
+GPA: 3.90
+● Major in Computer Science with a focus on Machine Learning and AI
+● Relevant Coursework: Introduction to AI, Internet Computing, Database Management, Computer
+Systems Organization, Statistical Machine Learning
+
+WORK EXPERIENCES
+Software Engineering Intern, Google
+June 2023 - September 2023 | Sunnyvale, CA
+● Worked on a version of Bard for Google Developers that has been trained on Google's internal
+data to complete developer assistance oriented tasks such as finding information, coding, etc.
+● Evaluated various prompt engineering strategies, using Python in Google Colab, to develop an
+optimized methodology for instructing the large language model to generate and propose
+related potential questions that a user might ask in conversation.
+● Successfully used Java to wrap the process in an API for future scalability as measured by the
+API’s immediate adoption for external, related projects.
+● Consulted with UI to enable functional user experiences when utilizing the API within web
+chatbot interface.
+● Fulfilled an additional project to create a Python script that assesses ML model performance on
+different evaluation datasets using various metrics and benchmarks. The script is used daily to
+evaluate and improve models.
+STEP Intern, Google
+May 2022 - August 2022 | Sunnyvale, CA
+● Developed fullstack integration between Google Chats and Calendar, under assistive suggestions
+platform Bullseye, to reduce user context switching.
+● Utilized natural language understanding and grammar rules in SRGS files to proactively detect
+agenda-related queries such as “When is our next meeting with John?” in chat conversations.
+● Built executors using Java to incorporate Chat, fetch agenda information corresponding to the
+NLU developed intent, and provide user facing rendering of relevant calendar information.
+
+PROJECTS
+Macalester Classroom Navigation Tool, Software Design and Development Class, Group Project
+● Worked with three others over a four month period to build an interactive campus map that can
+navigate students to their classrooms. Iterated on and adopted by school.
+● Delegated and organized the use of HTML, CSS, and JS, using Git source control to collaborate.
+Chess Engine, Personal Project
+● Utilized graphical toolkit PyQt5 to build a chess engine in Python using alpha-beta pruning and
+quiescence search functionality with piece-square tables for positional evaluation.
+
+ACTIVITIES AND LEADERSHIP
+Natural Language Processing with Deep Learning, XCS224N
+Winter 2019 - 2020 | 10-Weeks
+● Learned how to utilize modern neural network algorithms for processing linguistic information.
+● Completed graduate-level course for Stanford’s Artificial Intelligence Professional Program.
+Section Leader for Code in Place
+April 2020 - May 2020 | Online Course
+● Taught weekly sections to twelve international students in an introductory Python course using
+Stanford’s CS106A class materials.
+
+

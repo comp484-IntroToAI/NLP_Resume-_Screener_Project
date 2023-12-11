@@ -1,0 +1,70 @@
+Isaac B. Wan
+Skokie, IL | 847-933-0196 | isaacwan7@gmail.com | linkedin.com/in/isaac-wan
+EDUCATION
+Macalester College, Saint Paul, MN
+Bachelor of Arts Degree Expected: May 2024
+Majors: Computer Science and Chinese Language & Culture
+GPA: 3.83
+Semester Abroad GPA: 3.86
+Honors/Awards: DeWitt Wallace Distinguished Scholarship and John & Dolores Holl Scholarship
+Extracurricular Activities/Clubs: Game Developers at Mac (Treasurer) and Macalester Consulting Group (Member)
+Relevant Coursework: Introduction to Statistical Modeling
+China Educational Tours (CET) Taiwan
+National Taiwan University, Taipei, Taiwan, Mandarin Language and Culture
+Aug. 2022 - Nov. 2022
+● Participated in daily language class (15 hours per week) in the Chinese Language Division, learning new grammar
+and vocabulary.
+● Attended weekly Taiwanese Cultural elective (3 hours per week), studying Taiwanese history and culture.
+● Coordinated weekly meetings with a language partner to practice speaking Chinese and form bonds.
+SKILLS
+Languages:
+Software:
+
+Chinese (Professional) Python (Intermediate)
+Postman (Basic)
+WordPress (Basic)
+
+Linux (Basic) SQL (Basic)
+R (Basic)
+Adobe Creative Cloud (Basic) Canva (Basic)
+
+CERTIFICATE / BADGES
+Cybersecurity Professional Certificate, Google (In-Progress)
+July 2023 - Present
+● Completed the first, second, third, and fourth courses of the eight total in the program.
+API Fundamentals Student Expert, Postman
+Aug. 2023
+● Demonstrated proficiency with APIs and Postman by completing foundational tasks in Postman and passing all
+tests with a submitted Postman Collection.
+Technology Academy, AT&T
+July 2023
+● Acquired technology and personal growth acumen and professional development.
+● Gained insights and advice on technology, leadership, and career from business executives and recognized experts
+● Completed entry-level training in data analytics, SQL, leadership in tech, and 5G tech strategy.
+CODING PROJECTS / PROTOTYPES
+Comp-394 Human Computer Interaction
+Spring 2023
+● Redesigned Macalester’s MSCS department website for non-MSCS students fulfilling their general education.
+● Accomplished by conducting a heuristic evaluation, then assessing the main heuristics related to our user group.
+● Modeled our prototype with pen and paper, then revised it using Figma to develop a high-fidelity prototype.
+● Thoughtfully engineered a community word library interface to be utilized for AAC devices.
+● Achieved by consulting a panel of AAC device users about their issues and applied value sensitive design theory.
+● Composed an affinity diagram to narrow our scope and conceptualized our community word library interface.
+Comp-225 Software Design and Development
+Spring 2022
+● Planned and built a Jell-O physics-based, competitive basketball game, “Sqwish,” using a game framework.
+● Collaborated with a team over the course of a semester and independently learned JavaScript for our project.
+Comp-221 Algorithm Design and Analysis
+Spring 2022
+● Researched and programmed a Rubik’s Cube algorithm in Java to solve a user’s scrambled Rubik’s Cube.
+EXPERIENCE
+Macalester’s Digital Resource Center, St. Paul, MN
+Sept. 2020 - Present
+Assistant
+● Manages tech equipment for students and faculty and prepares software for events, projects, or personal use.
+● Operates troubleshooting ticket system, TopDesk, to provide technical assistance and 3D/poster printing requests.
+● Coded and regularly maintains a Discord bot that connects to TopDesk’s API to pull tickets and post them.
+● Taught monthly workshops for students and staff to learn about new technologies and software, such as Canva.
+● Organizes Macalester’s WordPress sites using Airtable and migrates sites to the latest version.
+
+

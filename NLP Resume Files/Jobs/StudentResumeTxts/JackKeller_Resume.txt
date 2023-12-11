@@ -1,0 +1,62 @@
+Jack Keller
+Education
+
+jiekeller.github.io
+jkeller1@macalester.edu
+(617) 797-9684
+
+Macalester College, St. Paul, MN
+Bachelor of Arts Double Major - Expected May 2024
+GPA 3.97
+Computer Science
+Chinese Studies
+
+Fellowship
+
+Mellon Mays Fellow
+Andrew Mellon Foundation - Saint Paul, MN September 2022 -May 2024
+Fully-funded Fellowship sponsored by the Andrew Mellon Foundation to
+support research and translation on contemporary migrant worker poetry in
+China.
+
+Computer
+Skills
+
+Focus on
+● Machine Learning: experienced with libraries such as SKLearn,
+Tensor-Flow, Pandas
+● Parallel Programming
+Proficient: Java, Python
+Familiar: C, Javascript, C++
+The usual assortment of Office (Microsoft/Google) and Graphics (Adobe)
+tools.
+
+Languages
+
+Fluent in Mandarin (spoken and written), will graduate with a major in
+Chinese as well.
+
+Experience
+
+APERIO - Cambridge, MA
+Lead Generation Specialist
+Market research for venture-funded SAAS business.
+
+Summer 2022
+
+VocalID, Inc. - Belmont, MA
+Summer 2019
+Marketing Intern (sponsored by Mass Biotech Council)
+Online, market and competitive research, lead generation, company
+fundraising and website analytics for venture-funded MIT spin-out.
+Social media platform management using Hootsuite.
+Completed large-scale study of the market characteristics for voice talent to
+inform product development and marketing strategy.
+Relevant
+Coursework
+
+Core Concepts in CS, Object Oriented Programming, Data Structures,
+Computer Systems, Software Development, Discrete Mathematics, Algorithm
+Design / Analysis, Parallel Programming and Intro to AI.
+
+
