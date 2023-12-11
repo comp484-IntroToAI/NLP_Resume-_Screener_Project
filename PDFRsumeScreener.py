@@ -83,7 +83,7 @@ def getBestResume(resumeDirectory, jobText):
     return bestResume, bestResumeScore
 
 # print(getBestResume(directoryInfoTech, getPDFJobDescription(sampleJob)))
-print(getBestResume(directoryChef, getPDFJobDescription(sampleJob)))
+# print(getBestResume(directoryChef, getPDFJobDescription(sampleJob)))
 
 print(getBestResume(directoryStudentResumes, sampleJob2))
 
