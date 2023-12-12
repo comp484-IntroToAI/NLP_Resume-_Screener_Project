@@ -1,0 +1,57 @@
+SHOMRIK MONDAL 18597 Cox Avenue Saratoga, CA 95070 408-668-5761 shomrik@gmail.com
+https://www.linkedin.com/in/shomrik/
+
+OBJECTIVE
+I am seeking an entry level position in the intersection of finance, computer science, and data science, aiming to apply my knowledge to contribute to the development of‬ ‭innovative products and services. Simultaneously, I am eager to acquire new‬ experiences and skills in this dynamic field.‬
+
+ACADEMICS
+Bachelor of Arts
+
+Macalester College
+Majors: Economics Computer Science
+Relevant Coursework:
+Empirical Finance, Capital Markets, Introduction to Econometrics,
+
+Intermediate Micro & Macroeconomic Analysis
+Statistical Machine Learning, Algorithm Design & Analysis, Intro to Artificial Intelligence, Data Structures, Software Testing, Software Design Development, Discrete Mathematics, Linear Algebra
+Academic Projects:
+Capstone paper Critically analyzed the efficiency of the VGG16 image recognition model in the context of bird species identification, exploring avenues for optimization to enhance its performance in a paper (COMP 484 Introduction to Artificial Intelligence)‬
+
+Statistically examined the impact of a salary cap on the success of teams in the National Hockey League and discussed my findings in a paper (ECON 381 Introduction to Econometrics)
+
+Statistically examined the impacts of utilizing powerlifting equipment, specifically straps, on powerlifters maximum lifts in deadlifts, squats, and bench (STAT 155 Introduction to Statistical Modeling)
+
+Created a web hosted truth or dare game for multiplayer users using JavaScript, HTML, and ReactJS (COMP 225 Software Design and Development)
+
+Used Java to create a data management program to store, categorize, and retrieve donation data (COMP 128 Data Structures)
+Fall 2020 Spring 2024
+
+Created a hexagonal version of 2048 game in Java (COMP 127 Object Oriented Programming and Abstraction)
+Skills and Abilities
+Java, Python, HTML, JavaScript, R, and Stata
+Gitlab, IntelliJ, VSCode, JUnit, Jira
+Microsoft Excel, Word, and PowerPoint
+Leadership, effective communication, presentation, and collaboration
+
+Experience
+Software QA Engineer Intern
+Flywheel.io
+07/2022 - 11/2022
+
+Implemented automated testing using Python and conducted manual testing as a part of the Core Data Management team. In addition to working with existing test cases, I wrote new test cases and plans.
+
+Worked with the front end team reviewing merge request. These ranged from UI fixes to implementation of new features.
+
+NCAA Division III Football, MIAC
+Kicker
+Macalester College Football
+Four year player on Macalester's Varsity team
+Cultivated a robust work ethic, honed team building skills, and demonstrated leadership prowess, both in practical settings and within the confines of the weight room.
+
+Dedicated approximately 25 hours per week to a combination of practice, weightlifting sessions, meetings, and competitions, all while successfully managing a full course load.
+
+Conducted meetings with potential football recruits and their families, providing guided tours of the campus and facilities. Additionally, shared insights into my personal experiences as a student athlete through participation in a player panel.
+
+References
+Mario Solis-Garcia, PhD, Professor at Macalester College and Academic Advisor
+Phil Nicolaides, Head Football Coach at Macalester College
