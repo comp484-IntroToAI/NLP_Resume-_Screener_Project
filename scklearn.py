@@ -65,19 +65,20 @@ def getPDFJobDescription(jobPath):
 
 def getBestResume(resumeDirectory, jobText):
     resumeScoreHolder = dict()
-    for pdfFile in os.listdir(resumeDirectory):
-        completeResume = os.path.join(resumeDirectory, pdfFile)
+    for file in os.listdir(resumeDirectory):
+        completeResume = os.path.join(resumeDirectory, file)
         if os.path.isfile(completeResume):
-            with open (completeResume, "rb") as f:
-                pdf = pdftotext.PDF(f)
-                resumeText = "\n\n".join(pdf)
-                content = [jobText, resumeText]
+            with open (completeResume, "r") as singleResume:
+                readResume = singleResume.read()
+                # pdf = pdftotext.PDF(f)
+                # resumeText = "\n\n".join(pdf)
+                content = [jobText, readResume]
                 cv = CountVectorizer(stop_words=list)
                 matrix = cv.fit_transform(content)
                 similarity_matrix = cosine_similarity(matrix)
                 print('------ new resume  ------')
                 result = str(similarity_matrix[1][0]*100)
-                print('Current Resume:' + pdfFile)
+                print('Current Resume:' + file)
                 print('Resume matches by:'+ result + '%\n')
                 resumeScoreHolder.update({completeResume : result})
     bestResume = max(resumeScoreHolder, key = resumeScoreHolder.get)
