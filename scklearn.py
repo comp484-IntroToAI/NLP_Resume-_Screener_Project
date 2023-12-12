@@ -30,6 +30,8 @@ directoryPR = 'NLP Resume Files/data/PUBLIC-RELATIONS/'
 directorySales = 'NLP Resume Files/data/SALES/'
 directoryTeacher = 'NLP Resume Files/data/TEACHER/'
 directoryStudentResumes = 'NLP Resume Files/Student Resumes/'
+directoryCleanResumes = 'NLP Resume Files/Cleaned Resumes/'
+
 
 sampleJob = "NLP Resume Files/Jobs/Sample Job Description.pdf"
 sampleJob2 = "NLP Resume Files/Jobs/Job-Description2.txt"
@@ -85,7 +87,7 @@ def getBestResume(resumeDirectory, jobText):
 # print(getBestResume(directoryInfoTech, getPDFJobDescription(sampleJob)))
 # print(getBestResume(directoryChef, getPDFJobDescription(sampleJob)))
 
-print(getBestResume(directoryStudentResumes, sampleJob2))
+print(getBestResume(directoryCleanResumes, sampleJob2))
 
 
 
