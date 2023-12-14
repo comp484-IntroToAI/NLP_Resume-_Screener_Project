@@ -43,7 +43,7 @@ directoryFinance = 'NLP Resume Files/data/FINANCE/'
 directoryFitness = 'NLP Resume Files/data/FITNESS/'
 directoryHealthcare = 'NLP Resume Files/data/HEALTHCARE/'
 directoryHR = 'NLP Resume Files/data/HR/'
-directoryInfoTech = 'NLP Resume Files/data/INFORMATION-TECHNOLOGY/'
+directoryInfoTech = '/Users/jackkeller/Desktop/484F23/project-jack_isaac/NLP Resume Files/data/INFORMATION-TECHNOLOGY'
 directoryPR = 'NLP Resume Files/data/PUBLIC-RELATIONS/'
 directorySales = 'NLP Resume Files/data/SALES/'
 directoryTeacher = 'NLP Resume Files/data/TEACHER/'
@@ -127,7 +127,7 @@ resumeScoreHolder = dict()
 for file in os.listdir(directoryInfoTech):
     completeResume = os.path.join(resumeDirectory, file)
     if os.path.isfile(completeResume):
-        with open (completeResume, "r") as f:
+        with open (completeResume, "rb") as f:
             pdf = pdftotext.PDF(f)
             resumeText = "\n\n".join(pdf)
             finalResumeV = np.empty([2, 300])

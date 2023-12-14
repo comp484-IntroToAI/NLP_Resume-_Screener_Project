@@ -1,4 +1,12 @@
 import docx2txt
+directoryInfoTech = '/Users/jackkeller/Desktop/484F23/project-jack_isaac/NLP Resume Files/data/INFORMATION-TECHNOLOGY'
+import os
+import itertools
+import math
+import re
+import pdftotext
+import torch as torch
+import torch.nn.functional as Y
 
 resume = docx2txt.process('/Users/jackkeller/Desktop/484F23/project-jack_isaac/NLP Resume Files/Cleaned Resumes docx/JackKeller_Resume.docx')
 # resume = docx2txt.process('content/Keller_Tech_Resume9.18.23.docx')
@@ -23,18 +31,47 @@ list = ["the", "a", "about", "above", "actually", "after", "again", "against", "
         "was", "we'd", "we", "we'll", "we're", "we've", "were", "what", "what's", "when", "whenever", "when's", "where", "whereas", "wherever", "where's", "whether", "which", "while", "who", "whoever", "who's", "whose", "why", "whom", "why's", "will", "with", "within", "would",
         "yes", "yet", "you", "you'd", "you'll", "you're", "you've", "your", "yours", "yourself", "yourself", "yourselves"]
 
-content = [job_description, resume]
+# content = [job_description, resume]
 
 
 from sklearn.feature_extraction.text import CountVectorizer
 
 
-cv = CountVectorizer(stop_words=list)
-matrix = cv.fit_transform(content)
+# cv = CountVectorizer(stop_words=list)
+# matrix = cv.fit_transform(content)
 
 from sklearn.metrics.pairwise import cosine_similarity
-similarity_matrix = cosine_similarity(matrix)
 
-print(similarity_matrix)
+def getPDFJobDescription(jobPath):
+    with open (jobPath, "rb") as j:
+        jobText = pdftotext.PDF(j)
+        completejobDesciption = "\n\n".join(jobText)
+    return completejobDesciption
 
-print('Resume matches by: '+ str(similarity_matrix[1][0]*100)+ '%')
+def getBestResume(resumeDirectory, jobText):
+    counter = 0
+    resumeScoreHolder = dict()
+    for file in os.listdir(resumeDirectory):
+        print(file)
+        completeResume = os.path.join(resumeDirectory, file)
+        if os.path.isfile(completeResume):
+            with open (completeResume, "r") as f:
+                resume = pdftotext.PDF(f)
+                resumeText = "\n\n".join(resume)
+                content = [jobText, resumeText]
+                cv = CountVectorizer(stop_words=list)
+                matrix = cv.fit_transform(content)
+                similarity_matrix = cosine_similarity(matrix)
+                print('------ new resume  ------')
+                result = str(similarity_matrix[1][0]*100)
+                if (result > 20):
+                    counter = counter + 1
+    bestResume = max(resumeScoreHolder, key = resumeScoreHolder.get)
+    bestResumeScore = resumeScoreHolder[bestResume]
+    return bestResume, bestResumeScore, counter
+
+job2Text = open("/Users/jackkeller/Desktop/484F23/project-jack_isaac/NLP Resume Files/Jobs/Job-Description.txt")
+
+sampleJob2 = job2Text.read()
+# print(sampleJob2)
+print(getBestResume(directoryInfoTech, sampleJob2))
