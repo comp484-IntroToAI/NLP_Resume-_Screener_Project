@@ -81,10 +81,13 @@ def getBestResume(resumeDirectory, jobText):
                 similarity_matrix = cosine_similarity(matrix)
                 print('------ new resume  ------')
                 result = str(similarity_matrix[1][0]*100)
+                if (float(result) > 20) :
+                    counter = counter + 1
                 resumeScoreHolder.update({completeResume : result})
     bestResume = max(resumeScoreHolder, key = resumeScoreHolder.get)
     bestResumeScore = resumeScoreHolder[bestResume]
-    return bestResume, bestResumeScore, counter
+    print("HOLY CRAP THIS DIRECTORY HAS THIS MNAY HAT PASSED: " + str(counter))
+    return bestResume, bestResumeScore
 
 print(getBestResume(directoryInfoTech, job_description))
 

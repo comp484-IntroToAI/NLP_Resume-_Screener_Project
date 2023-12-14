@@ -5,12 +5,11 @@ import itertools
 import math
 import re
 import pdftotext
-import torch as torch
-import torch.nn.functional as Y
 
-resume = docx2txt.process('/Users/jackkeller/Desktop/484F23/project-jack_isaac/NLP Resume Files/Cleaned Resumes docx/JackKeller_Resume.docx')
+
+directoryInfoTech = 'NLP Resume Files/data/INFORMATION-TECHNOLOGY/'
 # resume = docx2txt.process('content/Keller_Tech_Resume9.18.23.docx')
-job_description = "**Job Title: Entry-Level Software Engineer* [Company Name] is a dynamic and innovative software development company committed to creating cutting-edge solutions that redefine industries. We pride ourselves on fostering a collaborative and inclusive work environment where creativity and technical excellence thrive. As we continue to expand our team, we are seeking passionate and talented individuals to join us on our journey. **Position Overview:** We are looking for an entry-level software engineer to contribute to the design, development, and maintenance of our software applications. As a key member of our engineering team, you will work closely with experienced developers, participating in various stages of the software development lifecycle. This is an excellent opportunity for a recent graduate or an individual with limited professional experience to grow their skills in a supportive and challenging environment.**Responsibilities:** Collaborate with cross-functional teams to understand project requirements and specifications. Assist in the design and implementation of software solutions, following best practices and coding standards. Write clean, efficient, and well-documented code. Participate in code reviews to ensure the quality of the codebase. Debug and troubleshoot software defects and issues. Learn and adapt to new technologies and programming languages as needed. Contribute ideas to improve existing processes and workflows. **Qualifications:** Bachelor’s degree in Computer Science, Software Engineering, or a related field. Strong understanding of programming fundamentals and object-oriented design. Proficiency in at least one programming language (e.g., Java, C++, Python, etc.). Knowledge of software development tools and methodologies. Excellent problem-solving and analytical skills. Good communication and teamwork abilities. Demonstrated passion for software development through personal projects, internships, or coursework.**Preferred Skills:**  Familiarity with web development technologies (HTML, CSS, JavaScript). Experience with version control systems (Git, SVN). Understanding of database concepts and SQL. 4. Knowledge of software testing principles. 5. Exposure to agile development methodologies. **Perks and Benefits:** 1. Competitive salary and performance-based bonuses. 2. Comprehensive health, dental, and vision insurance. 3. Flexible work hours and remote work options. 4. Opportunities for professional development and career growth. 5. Fun and collaborative work environment with team-building activities."
+job_description = "NLP Resume Files\Jobs\Job-Description.txt"
 list = ["the", "a", "about", "above", "actually", "after", "again", "against", "all", "almost", "also", "although", "always", "am", "an", "and", "any", "are", "as", "at",
         "be", "became", "become", "because", "bin", "before", "being", "below", "between", "both", "but", "by", 
         "can", "could", 
@@ -32,6 +31,8 @@ list = ["the", "a", "about", "above", "actually", "after", "again", "against", "
         "yes", "yet", "you", "you'd", "you'll", "you're", "you've", "your", "yours", "yourself", "yourself", "yourselves"]
 
 # content = [job_description, resume]
+
+
 
 
 from sklearn.feature_extraction.text import CountVectorizer
@@ -56,7 +57,7 @@ def getBestResume(resumeDirectory, jobText):
         completeResume = os.path.join(resumeDirectory, file)
         if os.path.isfile(completeResume):
             with open (completeResume, "r") as f:
-                resume = pdftotext.PDF(f)
+                resume = docx2txt.process(f)
                 resumeText = "\n\n".join(resume)
                 content = [jobText, resumeText]
                 cv = CountVectorizer(stop_words=list)
@@ -70,8 +71,6 @@ def getBestResume(resumeDirectory, jobText):
     bestResumeScore = resumeScoreHolder[bestResume]
     return bestResume, bestResumeScore, counter
 
-job2Text = open("/Users/jackkeller/Desktop/484F23/project-jack_isaac/NLP Resume Files/Jobs/Job-Description.txt")
 
-sampleJob2 = job2Text.read()
 # print(sampleJob2)
-print(getBestResume(directoryInfoTech, sampleJob2))
+print(getBestResume(directoryInfoTech, job_description))
