@@ -32,11 +32,6 @@ directoryTeacher = 'NLP Resume Files/data/TEACHER/'
 directoryStudentResumes = 'NLP Resume Files/Student Resumes/'
 directoryCleanResumes = 'NLP Resume Files/Cleaned Resumes/'
 
-
-sampleJob = "NLP Resume Files/Jobs/Sample Job Description.pdf"
-sampleJob2 = "NLP Resume Files/Jobs/Job-Description2.txt"
-sampleResume = "NLP Resume Files/Fullstack-Developer-Resume.txt"
-
 list = ["the", "a", "about", "above", "actually", "after", "again", "against", "all", "almost", "also", "although", "always", "am", "an", "and", "any", "are", "as", "at",
         "be", "became", "become", "because", "bin", "before", "being", "below", "between", "both", "but", "by", 
         "can", "could", 
@@ -68,11 +63,10 @@ def getBestResume(resumeDirectory, jobText):
     for file in os.listdir(resumeDirectory):
         completeResume = os.path.join(resumeDirectory, file)
         if os.path.isfile(completeResume):
-            with open (completeResume, "r") as singleResume:
-                readResume = singleResume.read()
-                # pdf = pdftotext.PDF(f)
-                # resumeText = "\n\n".join(pdf)
-                content = [jobText, readResume]
+            with open (completeResume, "r") as f:
+                pdf = pdftotext.PDF(f)
+                resumeText = "\n\n".join(pdf)
+                content = [jobText, resumeText]
                 cv = CountVectorizer(stop_words=list)
                 matrix = cv.fit_transform(content)
                 similarity_matrix = cosine_similarity(matrix)
@@ -88,7 +82,10 @@ def getBestResume(resumeDirectory, jobText):
 # print(getBestResume(directoryInfoTech, getPDFJobDescription(sampleJob)))
 # print(getBestResume(directoryChef, getPDFJobDescription(sampleJob)))
 
-# print(getBestResume(directoryCleanResumes, sampleJob2))
+# print(getBestResume(directoryCleanResumes, sampleJob))
+
+resume = "NLP Resume Files/Fullstack-Developer-Resume.txt"
+job_description = "NLP Resume Files/Jobs/Job-Description.txt"
 
 sampleResume = "/Users/jackkeller/Desktop/484F23/project-jack_isaac/NLP Resume Files/Cleaned Resumes/Edited JessicaMcAllister.txt"
 testDirectory = '/Users/jackkeller/Desktop/484F23/project-jack_isaac/NLP Resume Files/Student Resumes'
