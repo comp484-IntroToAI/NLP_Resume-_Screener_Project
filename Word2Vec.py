@@ -48,7 +48,7 @@ directoryPR = 'NLP Resume Files/data/PUBLIC-RELATIONS/'
 directorySales = 'NLP Resume Files/data/SALES/'
 directoryTeacher = 'NLP Resume Files/data/TEACHER/'
 
-job2Text = open("/Users/jackkeller/Desktop/484F23/project-jack_isaac/NLP Resume Files/Jobs/Job-Description2.txt")
+job2Text = open("/Users/jackkeller/Desktop/484F23/project-jack_isaac/NLP Resume Files/Jobs/Job-Description.txt")
 
 sampleJob2 = job2Text.read()
 
@@ -96,10 +96,7 @@ def cleanText(txtFile):
       to_array = [char for char in word]
       count = 0
       for char in to_array:
-        print(char)
-        print(ord(char))
         if (ord(char) < 65) or (96 > ord(char) > 90) or (122 < ord(char)):
-          print("OMG")
           to_array[count] = " "
         count = count + 1
       newStr += convert(to_array)
@@ -125,17 +122,16 @@ resumeDirectory = openResumes(directoryInfoTech)
 string = "as;dflkj!@#$%^-_"
 # print(cleanText(string))
 jobText = cleanText(sampleJob2)
-
+counter = 0
 resumeScoreHolder = dict()
 for file in os.listdir(directoryInfoTech):
     completeResume = os.path.join(resumeDirectory, file)
     if os.path.isfile(completeResume):
-        with open (completeResume, "r") as singleResume:
-            readResume = singleResume.read()
-            # pdf = pdftotext.PDF(f)
-            # resumeText = "\n\n".join(pdf)
+        with open (completeResume, "r") as f:
+            pdf = pdftotext.PDF(f)
+            resumeText = "\n\n".join(pdf)
             finalResumeV = np.empty([2, 300])
-            for word in readResume.split():
+            for word in resumeText.split():
                 try:
                     vector = glove_vectors[word]
                     finalResumeV += vector
@@ -143,7 +139,7 @@ for file in os.listdir(directoryInfoTech):
                     pass
                 except NameError:
                     pass
-            centroidResume = finalResumeV / len(readResume.split())
+            centroidResume = finalResumeV / len(resumeText.split())
             finalJobV = np.empty([2, 300])
             for word in jobText.split():
                 try:
@@ -157,8 +153,12 @@ for file in os.listdir(directoryInfoTech):
             updatedArray = np.reshape(np.array([centroidJob]), (300, 2))
             tensorJob = torch.from_numpy(centroidJob)
             tensorResume = torch.from_numpy(centroidResume)
-            print(Y.cosine_similarity(tensorJob, tensorResume))
-            print('------ new resume  ------')
+            value = Y.cosine_similarity(tensorJob, tensorResume)
+            newVal = value[0]
+            print(newVal.item())
+            if (newVal.item() > 0.96):
+                counter = counter + 1
+            print(counter)
             # result = str(similarity_matrix[1][0]*100)
             # print('Current Resume:' + file)
             # print('Resume matches by:'+ result + '%\n')

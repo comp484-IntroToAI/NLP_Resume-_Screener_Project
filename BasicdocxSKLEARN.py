@@ -27,6 +27,8 @@ content = [job_description, resume]
 
 
 from sklearn.feature_extraction.text import CountVectorizer
+
+
 cv = CountVectorizer(stop_words=list)
 matrix = cv.fit_transform(content)
 

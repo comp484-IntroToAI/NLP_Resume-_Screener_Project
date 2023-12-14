@@ -59,6 +59,7 @@ def getPDFJobDescription(jobPath):
     return completejobDesciption
 
 def getBestResume(resumeDirectory, jobText):
+    counter = 0
     resumeScoreHolder = dict()
     for file in os.listdir(resumeDirectory):
         completeResume = os.path.join(resumeDirectory, file)
@@ -72,14 +73,13 @@ def getBestResume(resumeDirectory, jobText):
                 similarity_matrix = cosine_similarity(matrix)
                 print('------ new resume  ------')
                 result = str(similarity_matrix[1][0]*100)
-                print('Current Resume:' + file)
-                print('Resume matches by:'+ result + '%\n')
+                if 
                 resumeScoreHolder.update({completeResume : result})
     bestResume = max(resumeScoreHolder, key = resumeScoreHolder.get)
     bestResumeScore = resumeScoreHolder[bestResume]
-    return bestResume, bestResumeScore
+    return bestResume, bestResumeScore, counter
 
-# print(getBestResume(directoryInfoTech, getPDFJobDescription(sampleJob)))
+print(getBestResume(directoryInfoTech, getPDFJobDescription(job_description)))
 # print(getBestResume(directoryChef, getPDFJobDescription(sampleJob)))
 
 # print(getBestResume(directoryCleanResumes, sampleJob))
