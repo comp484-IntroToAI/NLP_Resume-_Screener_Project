@@ -5,6 +5,10 @@ import os
 import itertools
 import math
 import re
+import torch as torch
+import torch.nn.functional as Y
+
+
 
 # importing all necessary modules
 from nltk.tokenize import sent_tokenize, word_tokenize
@@ -18,28 +22,6 @@ warnings.filterwarnings(action = 'ignore')
 import gensim
 from gensim.models import Word2Vec
 from gensim.test.utils import datapath
-
-# List of stop words
-stopWordsList = ["the", "a", "about", "above", "actually", "after", "again", "against", "all", "almost", "also", "although", "always", "am", "an", "and", "any", "are", "as", "at",
-        "be", "became", "become", "because", "bin", "before", "being", "below", "between", "both", "but", "by", 
-        "can", "could", 
-        "did", "do", "does", "doing", "down", "during", 
-        "each", "either", "else", 
-        "few", "for", "from", "further"
-        , "had", "has", "have", "having", "he", "he'd", "he'll", "hence", "he's", "her", "here", "hears", "hers", "herself", "him", "himself", "his", "how", "how's",
-        "I", "I'd", "I'll", "I'm", "I've", "if", "if", "in", "into", "is", "it", "it's", "its", "itself"
-        "just",
-        "let's",
-        "may", "maybe", "me", "might", "mine", "more", "most", "must", "my", "myself",
-        "neither", "nor", "not", 
-        "of", "oh", "on", "once", "only", "okay", "or,", "other", "ought", "our", "ours", "ourselves", "out", "over", "own",
-        "same", "she", "she'd", "she'll", "she's", "so", "some", "such", 
-        "than", "that", "that's", "the", "their", "theirs", "them", "themselves", "then", "there", "there's", "these", "they", "they'd", "they'll", "they're", "they've'", "this", "those", "through", "to", "too",
-        "under", "until", "up",
-        "very",
-        "was", "we'd", "we", "we'll", "we're", "we've", "were", "what", "what's", "when", "whenever", "when's", "where", "whereas", "wherever", "where's", "whether", "which", "while", "who", "whoever", "who's", "whose", "why", "whom", "why's", "will", "with", "within", "would",
-        "yes", "yet", "you", "you'd", "you'll", "you're", "you've", "your", "yours", "yourself", "yourself", "yourselves"]
-
 
 directoryAccountant = 'NLP Resume Files/data/ACCOUNTANT/'
 directoryAdvocate = 'NLP Resume Files/data/ADVOCATE/'
@@ -66,14 +48,9 @@ directoryPR = 'NLP Resume Files/data/PUBLIC-RELATIONS/'
 directorySales = 'NLP Resume Files/data/SALES/'
 directoryTeacher = 'NLP Resume Files/data/TEACHER/'
 
-sampleJob = "NLP Resume Files/Jobs/Sample Job Description.pdf"
-job2Text = open("NLP Resume Files/Jobs/Job-Description2.txt")
-sampleResume = open("NLP Resume Files/Fullstack-Developer-Resume.txt")
-sampleResume = sampleResume.read()
+job2Text = open("/Users/jackkeller/Desktop/484F23/project-jack_isaac/NLP Resume Files/Jobs/Job-Description2.txt")
 
 sampleJob2 = job2Text.read()
-cleanJob2 = sampleJob2.replace("\n", " ")
-
 
 jobDescriptionData = []
 
@@ -129,10 +106,8 @@ def cleanText(txtFile):
     return newStr
 
 def convert(s): 
- 
     # initialization of string to "" 
     new = "" 
- 
     # traverse in the string 
     for x in s: 
         new += x 
@@ -145,35 +120,50 @@ def convert(s):
 glove_vectors = gensim.downloader.load("glove-wiki-gigaword-300")
 glove_vectors.most_similar('twitter')
 resumeVectorContainer = dict()
-resumeList = openResumes(directoryInfoTech)
+resumeDirectory = openResumes(directoryInfoTech)
 
 string = "as;dflkj!@#$%^-_"
 # print(cleanText(string))
+jobText = cleanText(sampleJob2)
 
+resumeScoreHolder = dict()
+for file in os.listdir(directoryInfoTech):
+    completeResume = os.path.join(resumeDirectory, file)
+    if os.path.isfile(completeResume):
+        with open (completeResume, "r") as singleResume:
+            readResume = singleResume.read()
+            # pdf = pdftotext.PDF(f)
+            # resumeText = "\n\n".join(pdf)
+            finalResumeV = np.empty([2, 300])
+            for word in readResume.split():
+                try:
+                    vector = glove_vectors[word]
+                    finalResumeV += vector
+                except KeyError:
+                    pass
+                except NameError:
+                    pass
+            centroidResume = finalResumeV / len(readResume.split())
+            finalJobV = np.empty([2, 300])
+            for word in jobText.split():
+                try:
+                    vector = glove_vectors[word]
+                    finalJobV += vector
+                except KeyError:
+                    pass
+                except NameError:
+                    pass
+            centroidJob = finalJobV / len(jobText.split())
+            updatedArray = np.reshape(np.array([centroidJob]), (300, 2))
+            tensorJob = torch.from_numpy(centroidJob)
+            tensorResume = torch.from_numpy(centroidResume)
+            print(Y.cosine_similarity(tensorJob, tensorResume))
+            print('------ new resume  ------')
+            # result = str(similarity_matrix[1][0]*100)
+            # print('Current Resume:' + file)
+            # print('Resume matches by:'+ result + '%\n')
+            # resumeScoreHolder.update({completeResume : result})
 
-for i in range(0, len(resumeList), 1):
-    finalVector = np.empty([2, 300])
-    newText = cleanText(resumeList[i])
-    print("new text:  " + newText)
-    for word in newText.split(): #resumes are string //[] it should be bracketed?
-        try:
-            vector = glove_vectors[word]
-            finalVector += vector 
-        except keyError:
-            print("error")
-    centroid = finalVector / len(newText.split())
-
-        # print(word)
-        # numpy arrays have type, floats or doubles, think about overflow, int gonna overflow really easy, make sure they are doubles
-        # original_array = original_array + glove_vectors.__getitem__(word)
-        # finalVector = vector / resume.__sizeof__()
-        # resumeVectorContainer.update({finalVector : resume})
-     #try: 
-        #vector = ----
-    #except keyError:
-# # Print results
-# print(resumeCBOWModel.wv.similarity(openResumes(readSampleResume), getPDFJobDescription(sampleJob)))
-
-# print(resumeVectorContainer)
-print("now I can finally rest")
+    # print(resumeVectorContainer)
+    print("now I can finally rest")
 
