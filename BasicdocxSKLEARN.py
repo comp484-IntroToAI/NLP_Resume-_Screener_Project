@@ -7,6 +7,8 @@ import re
 import pdftotext
 
 
+
+
 directoryInfoTech = 'NLP Resume Files/data/INFORMATION-TECHNOLOGY/'
 # resume = docx2txt.process('content/Keller_Tech_Resume9.18.23.docx')
 job_description = "NLP Resume Files\Jobs\Job-Description.txt"
