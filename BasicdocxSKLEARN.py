@@ -1,16 +1,11 @@
 import docx2txt
-directoryInfoTech = '/Users/jackkeller/Desktop/484F23/project-jack_isaac/NLP Resume Files/data/INFORMATION-TECHNOLOGY'
 import os
 import itertools
 import math
 import re
 import pdftotext
 
-
-
-
 directoryInfoTech = 'NLP Resume Files/data/INFORMATION-TECHNOLOGY/'
-# resume = docx2txt.process('content/Keller_Tech_Resume9.18.23.docx')
 job_description = "NLP Resume Files\Jobs\Job-Description.txt"
 list = ["the", "a", "about", "above", "actually", "after", "again", "against", "all", "almost", "also", "although", "always", "am", "an", "and", "any", "are", "as", "at",
         "be", "became", "become", "because", "bin", "before", "being", "below", "between", "both", "but", "by", 
@@ -32,16 +27,7 @@ list = ["the", "a", "about", "above", "actually", "after", "again", "against", "
         "was", "we'd", "we", "we'll", "we're", "we've", "were", "what", "what's", "when", "whenever", "when's", "where", "whereas", "wherever", "where's", "whether", "which", "while", "who", "whoever", "who's", "whose", "why", "whom", "why's", "will", "with", "within", "would",
         "yes", "yet", "you", "you'd", "you'll", "you're", "you've", "your", "yours", "yourself", "yourself", "yourselves"]
 
-# content = [job_description, resume]
-
-
-
-
 from sklearn.feature_extraction.text import CountVectorizer
-
-
-# cv = CountVectorizer(stop_words=list)
-# matrix = cv.fit_transform(content)
 
 from sklearn.metrics.pairwise import cosine_similarity
 
