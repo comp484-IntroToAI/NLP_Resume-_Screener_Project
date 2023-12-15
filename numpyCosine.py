@@ -80,7 +80,7 @@ def getBestResume(resumeDirectory, jobText):
                     pass
                 cos = np.dot(vA, vB) / (np.sqrt(np.dot(vA,vA)) * np.sqrt(np.dot(vB,vB)))
                 print(cos)
-                if (float(cos) > 0.68) :
+                if (float(cos) > 0.71) :
                     counter = counter + 1
                 resumeScoreHolder.update({completeResume : cos})
     bestResume = max(resumeScoreHolder, key = resumeScoreHolder.get)

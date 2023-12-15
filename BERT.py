@@ -5,9 +5,7 @@
 
 import pdftotext
 import os
-import torch
 import torch.nn.functional as F
-import transformers
 from transformers import BertTokenizer, BertModel
 
 directoryInfoTech = 'NLP Resume Files/data/INFORMATION-TECHNOLOGY/'
@@ -36,8 +34,6 @@ def getBestResume(resumeDirectory, jobText, tokenizer, encoder):
                 val = F.cosine_similarity(resume_embedding, job_ad_embedding)
                 result = str(val.item())
                 print('--------New Resume--------')
-                # print('Current Resume:' + pdfFile)
-                # print('Resume matches by:'+ result + '%\n')  
                 print(result)
                 if (float(result) > 0.954):
                    counter = counter + 1    
@@ -48,13 +44,6 @@ def getBestResume(resumeDirectory, jobText, tokenizer, encoder):
     return bestResume, bestResumeScore
                 
 
-
-# Load the pretrained bert model & its tokenizer
-
-# In[2]:
-
-
-
 # Extract embeddings. BertModel has no classification head on top, so the output is just the hidden states of the last layer.
 # BERT was trained such that there is a special token (called CLS or the classification token) whose representation is used for sentence classification tasks.
 #.pooler_output retrieves that representation.
@@ -64,7 +53,6 @@ def BERT_encode(text, tokenizer, encoder):
     inputs = tokenizer(text, return_tensors="pt", truncation=True)
     return encoder(**inputs).pooler_output
 
-# And here's a quick demo of how to use these embeddings:
 def cleanText(txtFile):
     # Removes any special characters from inside the word and strips it to its basic
     txtFile.lower()
@@ -89,20 +77,6 @@ def convert(s):
     new += " "
     # return string
     return new
-
-
-# In[
-
-# resume_embedding = BERT_encode(sampleResume, tokenizer, encoder)
-# job_ad_embedding = BERT_encode(job_description, tokenizer, encoder)
-# print(resume_embedding.size(), job_ad_embedding.size())
-# val = F.cosine_similarity(resume_embedding, job_ad_embedding)
-# result = str(val.item())
-# print(result)
-
-
-
-# In[5]:
 
 print("INITIATE!!---------")
 print(getBestResume(directoryInfoTech, job_description, tokenizer, encoder))

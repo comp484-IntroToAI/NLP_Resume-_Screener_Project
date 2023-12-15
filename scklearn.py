@@ -81,7 +81,7 @@ def getBestResume(resumeDirectory, jobText):
                 similarity_matrix = cosine_similarity(matrix)
                 print('------ new resume  ------')
                 result = str(similarity_matrix[1][0]*100)
-                if (float(result) > 20) :
+                if (float(result) > 18) :
                     counter = counter + 1
                 resumeScoreHolder.update({completeResume : result})
     bestResume = max(resumeScoreHolder, key = resumeScoreHolder.get)
