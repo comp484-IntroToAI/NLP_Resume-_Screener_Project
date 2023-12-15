@@ -11,7 +11,7 @@ import os
 # importing all necessary modules
 from nltk.tokenize import sent_tokenize, word_tokenize
 import gensim
-import gensim.downloader as api
+import gensim.downloader
 import warnings
 import os
 import numpy as np
@@ -135,8 +135,8 @@ def convert(s):
 glove_vectors = gensim.downloader.load("glove-wiki-gigaword-300")
 # model = KeyedVectors.load_word2vec_format('/root/gensim-data/glove-wiki-gigaword-300/glove-wiki-gigaword-300.gz')
 
-gloveNPY = 'content/glove-wiki-gigaword-300.model.vectors.npy'
-gloveTXT = 'content/glove.6B.300d.txt'
+# gloveNPY = 'content/glove-wiki-gigaword-300.model.vectors.npy'
+# gloveTXT = 'content/glove.6B.300d.txt'
 
 
 # print(load_glove_model(gloveTXT))
