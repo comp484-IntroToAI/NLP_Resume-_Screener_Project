@@ -43,6 +43,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 from sklearn.metrics.pairwise import cosine_similarity
 
+
 def getPDFJobDescription(jobPath):
     with open (jobPath, "rb") as j:
         jobText = pdftotext.PDF(j)
