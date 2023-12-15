@@ -94,37 +94,3 @@ print(getBestResume(directoryInfoTech, job_description))
 print(getBestResume(directoryBanking, job_description))
 
 print(getBestResume(directoryChef, job_description))
-
-# print(getBestResume(directoryCleanResumes, sampleJob))
-
-
-
-# content = [sampleJob, job_description]
-# cv = CountVectorizer(stop_words=None)
-# matrix = cv.fit_transform(content)
-# similarity_matrix = cosine_similarity(matrix)
-# print('------ new resume  ------')
-# result = str(similarity_matrix[1][0]*100)
-# # print('Current Resume:' + pdfFile)
-# print('Resume matches by:'+ result + '%\n')
-
-
-# for pdfFile in os.listdir(directoryInfoTech):
-#     infoTechFiles = os.path.join(directoryInfoTech, pdfFile)
-#     if os.path.isfile(infoTechFiles):
-#         with open (infoTechFiles, "rb") as f:
-#             pdf = pdftotext.PDF(f)
-#             resumeText = "\n\n".join(pdf)
-#             content = [jobText, resumeText]
-#             cv = CountVectorizer()
-#             matrix = cv.fit_transform(content)
-#             similarity_matrix = cosine_similarity(matrix)
-#             print('------ resume  ------')
-#             result = str(similarity_matrix[1][0]*100)
-#             print('Current Resume:' + pdfFile)
-#             print('Resume matches by:'+ result + '%\n')
-#             scoreHolder.update({infoTechFiles : result})
-
-# maxResume = max(scoreHolder, key = scoreHolder.get)
-# print('The best resume: ' + maxResume)
-# print('Its score: ' + scoreHolder[maxResume])
