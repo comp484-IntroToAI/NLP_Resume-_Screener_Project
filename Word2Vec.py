@@ -1,27 +1,31 @@
 # Python program to generate word vectors using Word2Vec
-
 import pdftotext
-import os
-import itertools
-import math
-import re
 import torch as torch
 import torch.nn.functional as Y
+from sklearn.metrics.pairwise import cosine_similarity
 
-
+# Python program to generate word vectors using Word2Vec
+# import pdftotext
+import os
 
 # importing all necessary modules
 from nltk.tokenize import sent_tokenize, word_tokenize
+import gensim
 import gensim.downloader
 import warnings
 import os
 import numpy as np
 
+from gensim.test.utils import datapath
+
+# importing all necessary modules
 warnings.filterwarnings(action = 'ignore')
 
-import gensim
+from gensim.models import KeyedVectors
 from gensim.models import Word2Vec
 from gensim.test.utils import datapath
+
+# glove_model = KeyedVectors.load_word2vec_format('content/glove.6B.300d.txt', binary=False)
 
 directoryAccountant = 'NLP Resume Files/data/ACCOUNTANT/'
 directoryAdvocate = 'NLP Resume Files/data/ADVOCATE/'
@@ -48,11 +52,13 @@ directoryPR = 'NLP Resume Files/data/PUBLIC-RELATIONS/'
 directorySales = 'NLP Resume Files/data/SALES/'
 directoryTeacher = 'NLP Resume Files/data/TEACHER/'
 
-job2Text = open("/Users/jackkeller/Desktop/484F23/project-jack_isaac/NLP Resume Files/Jobs/Job-Description.txt")
+job2Text = open("NLP Resume Files/Jobs/Test Sample.txt")
+sampleResume = open("NLP Resume Files/Jobs/Test Sample.txt")
 
-sampleJob2 = job2Text.read()
-
-jobDescriptionData = []
+sampleText = sampleResume.read()
+jobText = job2Text.read()
+sampleResume.close()
+job2Text.close()
 
 # Create CBOW model (Continuous bag of words)
 
@@ -69,6 +75,18 @@ def openResumes(resumeDirectory):
                 cleanResumeText = resumeText.replace("\n", " ")
                 resumeList.append(cleanResumeText)
                 return resumeList
+
+def load_glove_model(File):
+    print("Loading Glove Model")
+    glove_model = {}
+    with open(File,'r') as f:
+        for line in f:
+            split_line = line.split()
+            word = split_line[0]
+            embedding = np.array(split_line[1:], dtype=np.float64)
+            glove_model[word] = embedding
+    print(f"{len(glove_model)} words loaded!")
+    return glove_model
 
 def getPDFJobDescription(jobPath):
     with open (jobPath, "rb") as j:
@@ -89,8 +107,8 @@ def createTokenFromText(textInput):
 
 def cleanText(txtFile):
     # Removes any special characters from inside the word and strips it to its basic
-    txtFile.lower()
-    txtFile.strip()
+    txtFile = txtFile.lower()
+    txtFile = txtFile.strip()
     newStr = ""
     for word in txtFile.split():
       to_array = [char for char in word]
@@ -115,55 +133,70 @@ def convert(s):
 #=---------MAIN-----------
 
 glove_vectors = gensim.downloader.load("glove-wiki-gigaword-300")
-glove_vectors.most_similar('twitter')
-resumeVectorContainer = dict()
-resumeDirectory = openResumes(directoryInfoTech)
+# model = KeyedVectors.load_word2vec_format('/root/gensim-data/glove-wiki-gigaword-300/glove-wiki-gigaword-300.gz')
 
-string = "as;dflkj!@#$%^-_"
-# print(cleanText(string))
-jobText = cleanText(sampleJob2)
-counter = 0
+# gloveNPY = 'content/glove-wiki-gigaword-300.model.vectors.npy'
+# gloveTXT = 'content/glove.6B.300d.txt'
+
+
+# print(load_glove_model(gloveTXT))
+
+# glove_vectors.most_similar('twitter')
+# resumeVectorContainer = dict()
+# resumeDirectory = openResumes(directoryInfoTech)
+
+cleanResumeText = cleanText(sampleText)
+cleanJobText = cleanText(jobText)
+finalResumeVec = np.empty(300)
+finalJobVec = np.empty(300)
+
+resumeCounter = 0
+jobCounter = 0
+
 resumeScoreHolder = dict()
-for file in os.listdir(directoryInfoTech):
-    completeResume = os.path.join(resumeDirectory, file)
-    if os.path.isfile(completeResume):
-        with open (completeResume, "rb") as f:
-            pdf = pdftotext.PDF(f)
-            resumeText = "\n\n".join(pdf)
-            finalResumeV = np.empty([2, 300])
-            for word in resumeText.split():
-                try:
-                    vector = glove_vectors[word]
-                    finalResumeV += vector
-                except KeyError:
-                    pass
-                except NameError:
-                    pass
-            centroidResume = finalResumeV / len(resumeText.split())
-            finalJobV = np.empty([2, 300])
-            for word in jobText.split():
-                try:
-                    vector = glove_vectors[word]
-                    finalJobV += vector
-                except KeyError:
-                    pass
-                except NameError:
-                    pass
-            centroidJob = finalJobV / len(jobText.split())
-            updatedArray = np.reshape(np.array([centroidJob]), (300, 2))
-            tensorJob = torch.from_numpy(centroidJob)
-            tensorResume = torch.from_numpy(centroidResume)
-            value = Y.cosine_similarity(tensorJob, tensorResume)
-            newVal = value[0]
-            print(newVal.item())
-            if (newVal.item() > 0.96):
-                counter = counter + 1
-            print(counter)
-            # result = str(similarity_matrix[1][0]*100)
-            # print('Current Resume:' + file)
-            # print('Resume matches by:'+ result + '%\n')
-            # resumeScoreHolder.update({completeResume : result})
+# for file in os.listdir(directoryInfoTech):
+#     completeResume = os.path.join(resumeDirectory, file)
+#     if os.path.isfile(completeResume):
+#         with open (completeResume, "rb") as f:
+#             pdf = pdftotext.PDF(f)
+#             resumeText = "\n\n".join(pdf)
+#             finalResumeV = np.empty([2, 300])
 
-    # print(resumeVectorContainer)
-    print("now I can finally rest")
+for word in cleanResumeText.split():
+    try:
+        vector = glove_vectors[word]
+        finalResumeVec += vector
+        resumeCounter += 1
+    except KeyError:
+        pass
+    except NameError:
+        pass
+centroidResume = finalResumeVec.reshape(1, -1) / resumeCounter
 
+for word in cleanJobText.split():
+    try:
+        vector = glove_vectors[word]
+        finalJobVec += vector
+        jobCounter += 1
+    except KeyError:
+        pass
+    except NameError:
+        pass
+
+centroidJob = finalJobVec.reshape(1, -1) / jobCounter
+
+# updatedArray = np.reshape(np.array([centroidJob]), (300, 2))
+tensorResume = torch.from_numpy(centroidResume)
+tensorJob = torch.from_numpy(centroidJob)
+
+
+cosinePair = Y.cosine_similarity(tensorJob, tensorResume)
+cosineScore = cosinePair[0]
+print(cosineScore.item())
+    # if (newVal.item() > 0.96):
+    #     counter = counter + 1
+    # print(counter)
+    # result = str(similarity_matrix[1][0]*100)
+    # print('Current Resume:' + file)
+    # print('Resume matches by:'+ result + '%\n')
+    # resumeScoreHolder.update({completeResume : result})
