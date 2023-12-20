@@ -85,7 +85,7 @@ def getBestResume(resumeDirectory, jobText):
                 resumeScoreHolder.update({completeResume : cos})
     bestResume = max(resumeScoreHolder, key = resumeScoreHolder.get)
     bestResumeScore = resumeScoreHolder[bestResume]
-    print("HOLY CRAP THIS DIRECTORY HAS THIS MNAY HAT PASSED: " + str(counter))
+    print("This resume directory has this number of relevant resumes " + str(counter))
     return bestResume, bestResumeScore
 
 print("INITIATING PROGRAM ______--------_______")
