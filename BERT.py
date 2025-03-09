@@ -40,7 +40,7 @@ def getBestResume(resumeDirectory, jobText, tokenizer, encoder):
                 resumeScoreHolder.update({completeResume : result})
     bestResume = max(resumeScoreHolder, key = resumeScoreHolder.get)
     bestResumeScore = resumeScoreHolder[bestResume]
-    print("HOLY CRAP THIS DIRECTORY HAS THIS MNAY HAT PASSED: " + str(counter))
+    print("This directory has this number of passes: " + str(counter))
     return bestResume, bestResumeScore
                 
 
